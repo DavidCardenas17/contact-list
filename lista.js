@@ -1,28 +1,33 @@
 let contactos=[
 
-"David Cardenas",
-"Dante Stone",
-"Lisa Ramirez",
-"Aurora  Cardenas",
 ];
 
-function agregarContacto (nombre){
-    contactos.push(nombre);
+function agregarContacto (contacto){
+    contactos.push(contacto);
+    
 };
 
 
-function eliminarContacto (nombre){
-    const indice = contactos.indexOf(nombre);
+function eliminarContacto (id){
+    const indice = contactos.findIndex(contacto => contacto.id === id);
     if (indice !== -1) {
         contactos.splice(indice, 1);
     }
 };
 
 
-function lista (){
+function lista () {
     console.log("Lista de contactos:");
-    for (let i =0; i < contactos.length; i++){
-        console.log(contactos[i]);
+    for (const contacto of contactos) 
+    {
+        console.log("ID:", contacto.id);
+        console.log("Nombre:", contacto.nombre);
+        console.log("Apellidos:", contacto.apellidos);
+        console.log("Teléfono:", contacto.telefono);
+        console.log("Ubicaciones:", contacto.ubicaciones);
+        console.log("Ciudad:", contacto.ciudad);
+        console.log("Dirección:", contacto.direccion);
+        console.log("------------------------");
     }
 };
 
@@ -35,21 +40,36 @@ while (true) {
         "4. Salir"
     );
 
-    if (opcion === "1") {
-        const nuevoContacto = prompt("Ingrese el nombre del nuevo contacto:");
+    if (opcion === "1") 
+    {
+    
+        const nuevoContacto =  {
+            id: parseInt(prompt("Ingrese el ID del nuevo contacto:")),
+            nombre: prompt("Ingrese el nombre del nuevo contacto:"),
+            apellidos: prompt("Ingrese los apellidos del nuevo contacto:"),
+            telefono: prompt("Ingrese el teléfono del nuevo contacto:"),
+            ubicaciones: prompt("Ingrese las ubicaciones del nuevo contacto:"),
+            ciudad: prompt("Ingrese la ciudad del nuevo contacto:"),
+            direccion: prompt("Ingrese la dirección del nuevo contacto:")
+         
+        }
+        
         agregarContacto(nuevoContacto);
         alert("Contacto agregado exitosamente.");
-    } else if (opcion === "2") {
-        const contactoAEliminar = prompt("Ingrese el nombre del contacto a eliminar:");
-        eliminarContacto(contactoAEliminar);
+    
+        } else if (opcion === "2") {
+        
+        const idAEliminar = parseInt(prompt("Ingrese el ID del contacto a eliminar:"));
+        eliminarContacto(idAEliminar);
         alert("Contacto eliminado exitosamente.");
-    } else if (opcion === "3") {
+        } else if (opcion === "3") {
         lista();
-    } else if (opcion === "4") {
+        } else if (opcion === "4") {
         alert("¡Hasta luego!");
         break;
-    } else {
+        } else {
         alert("Opción inválida. Por favor, elija una opción válida.");
     }
+    
 }
 
